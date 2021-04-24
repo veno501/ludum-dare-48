@@ -38,6 +38,9 @@ namespace Weapons
             // {
             //     DealDamage(hit.GetComponent<EnemyController>());
             // }
+            if (hit.GetComponentInParent<Sample>()) {
+                hit.GetComponentInParent<Sample>().TakeDamage(damage);
+            }
         }
 
         // void DealDamage(EnemyController enemy)

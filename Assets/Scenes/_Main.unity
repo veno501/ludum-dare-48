@@ -5521,7 +5521,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.12998396, g: 0.13694373, b: 0.21698111, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -10821,7 +10821,7 @@ GameObject:
   - component: {fileID: 945221568}
   - component: {fileID: 945221567}
   m_Layer: 0
-  m_Name: FieldOFView visualization
+  m_Name: visualization mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10836,7 +10836,7 @@ Transform:
   m_GameObject: {fileID: 945221565}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: -1}
   m_Children: []
   m_Father: {fileID: 1703773466}
   m_RootOrder: 0
@@ -10900,7 +10900,7 @@ GameObject:
   - component: {fileID: 1207064894}
   - component: {fileID: 1207064893}
   - component: {fileID: 1207064892}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16105,8 +16105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07ba8a0eccedcd8418d3e7aff0cdf6c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 5
-  viewAngle: 90
+  viewRadius: 15
+  viewAngle: 30
   targetMask:
     serializedVersion: 2
     m_Bits: 256
@@ -16117,7 +16117,7 @@ MonoBehaviour:
   meshResolution: 3
   edgeResolveIterations: 4
   edgeDstThreshold: 0.5
-  maskCutawayDst: 0.25
+  maskCutawayDst: 0
   viewMeshFilter: {fileID: 945221568}
 --- !u!1 &1711262918
 GameObject:

@@ -20,7 +20,7 @@ public class ParticleCollectables : MonoBehaviour
 
 	public void Spawn()
 	{
-		ps = GetComponentInChildren<ParticleSystem>();
+		ps = GetComponent<ParticleSystem>();
 		//collisionEvents = new List<ParticleCollisionEvent>();
 		var trigger = ps.trigger;
 		trigger.SetCollider(0, Player.tr);
@@ -33,6 +33,7 @@ public class ParticleCollectables : MonoBehaviour
 	{
 		// add minerals
 		// StatsManager.Score += scoreOnCollect;
+		Player.instance.stats.CollectSample(0.1f);
 	}
 
 	void OnParticleTrigger()

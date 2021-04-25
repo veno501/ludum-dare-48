@@ -34,13 +34,18 @@ namespace Weapons
 
         void OnTriggerEnter2D(Collider2D hit)
         {
+            if (hit.transform == Player.tr) return;
             // if (hit.GetComponent<EnemyController>() != null)
             // {
             //     DealDamage(hit.GetComponent<EnemyController>());
             // }
+            if (hit.GetComponentInParent<Creature>()) {
+                hit.GetComponentInParent<Creature>().TakeDamage(damage);
+            }
             if (hit.GetComponentInParent<Sample>()) {
                 hit.GetComponentInParent<Sample>().TakeDamage(damage);
             }
+            Destroy(this.gameObject);
         }
 
         // void DealDamage(EnemyController enemy)

@@ -12,10 +12,10 @@ public class Player : MonoBehaviour
 	public PlayerMovement movement;
 	public PlayerHealth health;
 	public PlayerWeapons weapons;
+	public PlayerStats stats;
 	// public PlayerCanvas canvas;
 
 	[Space]
-
 	[SerializeField]
 	SpriteRenderer spriteGraphic;
 
@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
 		movement = GetComponentInChildren<PlayerMovement>();
 		health = GetComponentInChildren<PlayerHealth>();
 		weapons = GetComponentInChildren<PlayerWeapons>();
+		stats = GetComponentInChildren<PlayerStats>();
 		// canvas = GetComponentInChildren<PlayerCanvas>();
 	}
 }

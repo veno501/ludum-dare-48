@@ -2,25 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Block
 {
-public Block blockLeft, blockRight, blockDown;
+public Block blockLeft, blockRight;
 
 public bool isEntryBlock;
+public bool isExitBlock;
 
-public int numOfMinerals;
-public int numOfEnemies;
+// public int numOfMinerals;
+// public int numOfEnemies;
 
-public Texture2D texture;
+public BlockData data;
+public Transform root;
 
-public Block(Texture2D _texture, int _numOfMinerals, int _numOfEnemies, Block _blockLeft, Block _blockRight, Block _blockDown, bool _isEntryBlock)
+public Block(Block _blockLeft, Block _blockRight, bool _isEntryBlock, bool _isExitBlock, BlockData _data)
 {
-        numOfMinerals = _numOfMinerals;
-        numOfEnemies = _numOfEnemies;
-        texture = _texture;
+        // numOfMinerals = _numOfMinerals;
+        // numOfEnemies = _numOfEnemies;
         blockLeft = _blockLeft;
         blockRight = _blockRight;
-        blockDown = _blockDown;
+        // blockDown = _blockDown;
         isEntryBlock = _isEntryBlock;
+        isExitBlock = _isExitBlock;
+        data = _data;
 }
 }

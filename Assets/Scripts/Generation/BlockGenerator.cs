@@ -76,7 +76,7 @@ public Layer GenerateLayer()
                 // currentBlock.data = new BlockData(getTexture(currentBlock)); // !!
                 currentBlock.data = new BlockData(
                         GetBlockTexture(currentBlock.blockLeft != null, currentBlock.blockRight != null, currentBlock.isExitBlock, currentBlock.isEntryBlock)
-                );
+                        );
         }
 
         // layers.Add(new Layer(blocks, entryBlock, entryBlockLower));

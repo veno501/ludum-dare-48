@@ -33,7 +33,7 @@ public GameObject GenerateColliders(Block _block)
                 for(int y = 0; y < imageWidth; y++)
                 {
                         Color pixel = _block.data.texture.GetPixel(y, x);
-                        if (pixel.grayscale < 0.5f)
+                        if (pixel == Color.black)
                         {
                                 Vector2 spawnPosition = new Vector3(-imageWidth/2+y, -imageHeight/2+x, 0) + new Vector3(0.5f, 0.5f, 0f);
                                 GameObject ob = Instantiate(tilePrefab, spawnPosition, Quaternion.identity) as GameObject;

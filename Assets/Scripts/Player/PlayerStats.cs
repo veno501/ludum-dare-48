@@ -11,20 +11,26 @@ public Text requiredText;
 protected override void Awake()
 {
         base.Awake();
-        requiredText.text = "" + samplesRequired;
+        requiredText.text = "" + (int)samplesRequired;
 }
 
 public void CollectSample(float amount)
 {
         samplesCollected += amount;
-
-        // update UI
-        collectedText.text = "" + (int)samplesCollected;
-
         if (samplesCollected >= samplesRequired)
         {
+                samplesCollected = samplesRequired;
                 OnEnoughSamplesCollected();
         }
+        // update UI
+        collectedText.text = "" + (int)samplesCollected;
+}
+
+public void ResetCollectedSamples()
+{
+        samplesCollected = 0f;
+        // update UI
+        collectedText.text = "" + (int)samplesCollected;
 }
 
 void OnEnoughSamplesCollected()

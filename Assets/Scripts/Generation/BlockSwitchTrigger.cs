@@ -18,17 +18,18 @@ void OnTriggerEnter2D(Collider2D hit)
 
                 // Level.instance.SwitchBlock(Level.instance.currentBlock.block);
                 if (direction == 'l') {
-                        Level.instance.SwitchBlock(Level.instance.currentBlock.blockLeft);
+                        Level.instance.SwitchBlock(Level.instance.currentBlock.blockLeft, direction);
                 }
                 else if (direction == 'r') {
-                        Level.instance.SwitchBlock(Level.instance.currentBlock.blockRight);
+                        Level.instance.SwitchBlock(Level.instance.currentBlock.blockRight, direction);
                 }
                 else if (direction == 'd') {
                         if (Player.instance.stats.samplesCollected >= Player.instance.stats.samplesRequired) {
-                                if (TutorialLevel.tutorialFinished == false)
+                                if (GameObject.Find("TutorialLevel") && TutorialLevel.tutorialFinished == false)
                                 {
                                         TutorialLevel.tutorialFinished = true;
                                         // switch scene
+                                        StartCoroutine(TutorialSceneSwitcher.LoadMainScene());
                                 }
                                 else
                                 {

@@ -47,7 +47,7 @@ public class ParticleCollectables : MonoBehaviour
 		for (int i = 0; i < numEnter; i++)
 		{
 			OnCollectParticle(enter[i]);
-			KillParticle(i);
+			//KillParticle(i);
 		}
 
 		ps.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);

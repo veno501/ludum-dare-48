@@ -19,8 +19,16 @@ public class Sample : MonoBehaviour
 
     void DropCollectable()
     {
-        GameObject ob = Instantiate(collectable, transform.position, Quaternion.identity) as GameObject;
-        // ob.GetComponent<Rigidbody2D>().velocity = (Player.tr.position - transform.position).normalized * 5f;
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject ob = Instantiate(collectable, transform.position, Quaternion.Euler(0,0,Random.Range(0,360))) as GameObject;
+            // ob.GetComponent<Rigidbody2D>().velocity = (Player.tr.position - transform.position).normalized * 5f;
+
+		    // = transform.TransformDirection(recoil);
+        
+            ob.GetComponent<Rigidbody2D>().velocity = ((Player.rb.position-(Vector2)transform.position) * 
+                (Random.insideUnitCircle*1f)).normalized * 8f;
+        }
 
         Destroy(this.gameObject);
     }

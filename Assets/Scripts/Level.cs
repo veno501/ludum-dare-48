@@ -16,14 +16,15 @@ public class Level : MonoBehaviour
     // public GameObject currentRoot;
     // block object pool
     public static Level instance;
-    BlockGenerator layerGenerator;
-    ColliderGenerator blockGenerator;
+    LayerGenerator layerGenerator;
+    BlockGenerator blockGenerator;
+    char previousTriggerSide;
 
     void Awake()
     {
         instance = this;
-        layerGenerator = GetComponentInChildren<BlockGenerator>();
-        blockGenerator = GetComponentInChildren<ColliderGenerator>();
+        layerGenerator = GetComponentInChildren<LayerGenerator>();
+        blockGenerator = GetComponentInChildren<BlockGenerator>();
 
         // !
         StartLayer();
@@ -31,22 +32,27 @@ public class Level : MonoBehaviour
 
     void StartLayer()
     {
+        Player.instance.stats.ResetCollectedSamples();
         // generate layer data, set new depth score, difficulty
         currentLayer = layerGenerator.GenerateLayer();
         currentBlock = currentLayer.entryBlock;
+        previousTriggerSide = 'd';
         StartBlock();
     }
 
     public void SwitchLayer()
     {
         // scrap current layer
-        StartCoroutine(FadeOut(fadeDuration * 2f));
+        Destroy(currentBlock.root.gameObject, fadeDuration*2f);
+        StartCoroutine(FadeOut(fadeDuration*2f));
 
-        Invoke("StartLayer", fadeDuration * 2f);
+        Invoke("StartLayer", fadeDuration*2f);
     }
 
     void StartBlock()
     {
+        if (currentBlock == null)
+            Debug.LogError("Block is NULL!");
         // generate block object and colliders from layer
         // !spawn samples, spawn enemies, spawn block switch triggers
 
@@ -54,6 +60,7 @@ public class Level : MonoBehaviour
         currentBlock.root = blockGenerator.GenerateColliders(currentBlock).transform;
         blockGenerator.SpawnEnemies(currentBlock);
         blockGenerator.SpawnSamples(currentBlock);
+        blockGenerator.SetPlayerToSpawnPoint(currentBlock, previousTriggerSide);
 
         Invoke("EnableTriggers", 2f);
         StartCoroutine(FadeIn(fadeDuration));
@@ -61,17 +68,17 @@ public class Level : MonoBehaviour
         // fade in
         // set player position, velocity for entry
         // disable entrance tunnel for a few seconds
-
-        SetPlayerToSpawnPoint();
     }
-
-    public void SwitchBlock(Block _block)
+    
+    public void SwitchBlock(Block _block, char _triggerSide)
     {
         // fade out
         // scrap current block
         // current block is next block
+        previousTriggerSide = _triggerSide;
+
         StartCoroutine(FadeOut(fadeDuration));
-        Destroy(currentBlock.root.gameObject, 0.5f);
+        Destroy(currentBlock.root.gameObject, fadeDuration);
 
         currentBlock = _block;
         Invoke("StartBlock", fadeDuration);
@@ -91,7 +98,7 @@ public class Level : MonoBehaviour
         // display retry menu...
     }
 
-    IEnumerator FadeOut(float _t)
+    public IEnumerator FadeOut(float _t)
     {
         for (float t = _t; t > 0.0f; t -= Time.deltaTime)
         {
@@ -102,7 +109,7 @@ public class Level : MonoBehaviour
         }
     }
 
-    IEnumerator FadeIn(float _t)
+    public IEnumerator FadeIn(float _t)
     {
         for (float t = _t; t > 0.0f; t -= Time.deltaTime)
         {
@@ -120,10 +127,5 @@ public class Level : MonoBehaviour
         {
             trigger.isEnabled = true;
         }
-    }
-
-    void SetPlayerToSpawnPoint()
-    {
-        Player.tr.position = new Vector3(-Player.tr.position.x, -Player.tr.position.y, 0f);
     }
 }

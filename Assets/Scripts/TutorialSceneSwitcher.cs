@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TutorialSceneSwitcher : MonoBehaviour
 {
@@ -15,9 +16,12 @@ public GameObject tutorialLevel;
 private bool tutorialStarted = false;
 private bool enableStart = false;
 
+public static TutorialSceneSwitcher instance;
+
 void Start()
 {
-        StartCoroutine(EnableStart());
+        instance = this;
+        StartCoroutine(EnableStartText());
 }
 
 void Update()
@@ -25,26 +29,33 @@ void Update()
         if (Input.anyKey && tutorialStarted == false && enableStart)
         {
                 tutorialStarted = true;
-                StartCoroutine(FadeOut(fadeDuration * 2f));
-                Invoke("StartTutorial", fadeDuration * 2f);
+                StartCoroutine(FadeOut(fadeDuration));
+                Invoke("StartTutorial", fadeDuration);
         }
 }
 
 void StartTutorial()
 {
-        StartCoroutine(FadeIn(fadeDuration * 2f));
+        StartCoroutine(FadeIn(fadeDuration));
         mainMenu.SetActive(false);
         tutorialLevel.SetActive(true);
 }
 
-IEnumerator EnableStart()
+IEnumerator EnableStartText()
 {
         yield return new WaitForSeconds(2);
         startText.gameObject.SetActive(true);
         enableStart = true;
 }
 
-IEnumerator FadeOut(float _t)
+public static IEnumerator LoadMainScene()
+{
+        instance.StartCoroutine(instance.FadeOut(1.5f));
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(1);
+}
+
+public IEnumerator FadeOut(float _t)
 {
         for (float t = _t; t > 0.0f; t -= Time.deltaTime)
         {
@@ -55,7 +66,7 @@ IEnumerator FadeOut(float _t)
         }
 }
 
-IEnumerator FadeIn(float _t)
+public IEnumerator FadeIn(float _t)
 {
         for (float t = _t; t > 0.0f; t -= Time.deltaTime)
         {

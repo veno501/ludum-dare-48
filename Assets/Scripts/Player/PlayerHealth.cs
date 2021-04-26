@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerHealth : PlayerModule
 {
@@ -16,6 +17,11 @@ public class PlayerHealth : PlayerModule
 		set
 		{
 			health = Mathf.Clamp(value, 0, maxHealth);
+			if (bar)
+			{
+				bar.maxValue = maxHealth;
+				bar.value = health;
+			}
 		}
 	}
 
@@ -31,6 +37,7 @@ public class PlayerHealth : PlayerModule
 	// public float shieldMultiplier = 1f;
 
 	public float resistanceModifier = 1f;
+	public Slider bar;
 
 	// [HideInInspector]
 	// public bool isInvulnerable;
@@ -40,6 +47,22 @@ public class PlayerHealth : PlayerModule
 	{
 		base.Awake();
 		Reset();
+	}
+
+	// public void OnTriggerEnter2D(Collider2D hit)
+	// {
+	// 	if (hit.GetComponentInParent<Creature>()) {
+	// 		hit.GetComponentInParent<Creature>().TakeDamage(new Damage(100f));
+	// 	}
+	// 	this.TakeDamage(new Damage(1.0f));
+	// }
+
+	public void OnCollisionEnter2D(Collision2D hit)
+	{
+		if (hit.transform.GetComponentInParent<Creature>()) {
+			hit.transform.GetComponentInParent<Creature>().TakeDamage(new Damage(100f));
+		}
+		this.TakeDamage(new Damage(1.0f));
 	}
 
 	public void Reset()

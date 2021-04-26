@@ -27,15 +27,15 @@ public void ParseTexture()
                         Color pixel = texture.GetPixel(y, x);
                         if (pixel == Color.red)
                         {
-                                enemySpawnPoints.Add(new Vector3(x, y, 0.0f));
+                                enemySpawnPoints.Add(new Vector3(y, x, 0.0f));
                         }
                         if (pixel == Color.blue)
                         {
-                                sampleSpawnPoints.Add(new Vector3(x, y, 0.0f));
+                                sampleSpawnPoints.Add(new Vector3(y, x, 0.0f));
                         }
                         if (pixel == Color.green)
                         {
-                                entryPoints.Add(new Vector3(x, y, 0.0f));
+                                entryPoints.Add(new Vector3(y, x, 0.0f));
                         }
                 }
         }

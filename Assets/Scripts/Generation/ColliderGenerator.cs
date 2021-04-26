@@ -11,13 +11,8 @@ public int imageHeight = 18;
 // public Sprite tileSprite;
 public GameObject tilePrefab;
 public GameObject blockBlueprint;
-
-void GenerateAll()
-{
-        // Texture2D bgTexture = GenerateDebugVisualization(Application.dataPath + "/Blocks/lu.png");
-
-        // GenerateColliders(bgTexture);
-}
+public List<GameObject> enemyPrefabs = new List<GameObject>();
+public GameObject samplePrefab;
 
 public GameObject GenerateColliders(Block _block)
 {
@@ -48,31 +43,61 @@ public GameObject GenerateColliders(Block _block)
         return newBlock;
 }
 
-Texture2D GenerateDebugVisualization(string path)
+public void SpawnEnemies(Block _block)
 {
-        GameObject bg = new GameObject();
-        bg.transform.localScale = new Vector2(100, 100);
-        bg.transform.position = new Vector2(0, 0);
-        bg.AddComponent<SpriteRenderer>();
+        GameObject enemyRoot = new GameObject("enemies");
+        enemyRoot.transform.SetParent(_block.root);
 
-        Texture2D bgTexture = LoadPNG(path);
-        Sprite bgSprite = Sprite.Create(bgTexture, new Rect(0, 0, bgTexture.width, bgTexture.height), new Vector2(0.5f, 0.5f));
-        SpriteRenderer spriteRenderer = bg.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = bgSprite;
+        List<Vector3> points = _block.data.enemySpawnPoints;
+        foreach (Vector3 point in points)
+        {
+                GameObject ob = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], 
+                        new Vector3(point.x-imageWidth/2, point.y-imageHeight/2, 0f), Quaternion.identity) as GameObject;
 
-        return bgTexture;
-}
-
-Texture2D LoadPNG(string filePath)
-{
-        Texture2D tex = null;
-        byte[] fileData;
-
-        if (System.IO.File.Exists(filePath)) {
-                fileData = System.IO.File.ReadAllBytes(filePath);
-                tex = new Texture2D(2, 2);
-                tex.LoadImage(fileData);
+                ob.transform.SetParent(enemyRoot.transform);
         }
-        return tex;
 }
+
+public void SpawnSamples(Block _block)
+{
+        GameObject sampleRoot = new GameObject("samples");
+        sampleRoot.transform.SetParent(_block.root);
+
+        List<Vector3> points = _block.data.sampleSpawnPoints;
+        foreach (Vector3 point in points)
+        {
+                GameObject ob = Instantiate(samplePrefab, 
+                        new Vector3(point.x-imageWidth/2+0.5f, point.y-imageHeight/2+0.5f, 0f), Quaternion.identity) as GameObject;
+
+                ob.transform.SetParent(sampleRoot.transform);
+        }
+}
+
+// Texture2D GenerateDebugVisualization(string path)
+// {
+//         GameObject bg = new GameObject();
+//         bg.transform.localScale = new Vector2(100, 100);
+//         bg.transform.position = new Vector2(0, 0);
+//         bg.AddComponent<SpriteRenderer>();
+
+//         Texture2D bgTexture = LoadPNG(path);
+//         Sprite bgSprite = Sprite.Create(bgTexture, new Rect(0, 0, bgTexture.width, bgTexture.height), new Vector2(0.5f, 0.5f));
+//         SpriteRenderer spriteRenderer = bg.GetComponent<SpriteRenderer>();
+//         spriteRenderer.sprite = bgSprite;
+
+//         return bgTexture;
+// }
+
+// Texture2D LoadPNG(string filePath)
+// {
+//         Texture2D tex = null;
+//         byte[] fileData;
+
+//         if (System.IO.File.Exists(filePath)) {
+//                 fileData = System.IO.File.ReadAllBytes(filePath);
+//                 tex = new Texture2D(2, 2);
+//                 tex.LoadImage(fileData);
+//         }
+//         return tex;
+// }
 }

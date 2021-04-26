@@ -52,6 +52,8 @@ public class Level : MonoBehaviour
 
         // currentBlock = _block;
         currentBlock.root = blockGenerator.GenerateColliders(currentBlock).transform;
+        blockGenerator.SpawnEnemies(currentBlock);
+        blockGenerator.SpawnSamples(currentBlock);
 
         Invoke("EnableTriggers", 2f);
         StartCoroutine(FadeIn(fadeDuration));

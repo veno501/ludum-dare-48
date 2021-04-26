@@ -19,22 +19,6 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	SpriteRenderer spriteGraphic;
 
-	// bool isVisible = true;
-	// public static bool IsVisible
-	// {
-	// 	get { return instance.isVisible; }
-	// 	set
-	// 	{
-	// 		instance.isVisible = value;
-			
-	// 		instance.spriteGraphic.gameObject.SetActive(value);
-	// 		if (value == false)
-	// 			instance.movement.thrusters.DisableThrusters();
-	// 		else
-	// 			instance.movement.thrusters.EnableThrusters();
-	// 	}
-	// }
-
 	void Awake ()
 	{
 		instance = this;
@@ -50,5 +34,14 @@ public class Player : MonoBehaviour
 		weapons = GetComponentInChildren<PlayerWeapons>();
 		stats = GetComponentInChildren<PlayerStats>();
 		// canvas = GetComponentInChildren<PlayerCanvas>();
+	}
+
+	// void OnTriggerEnter2D(Collider2D hit)
+	// {
+	// 	health.OnTriggerEnter2D(hit);
+	// }
+	void OnCollisionEnter2D(Collision2D hit)
+	{
+		health.OnCollisionEnter2D(hit);
 	}
 }

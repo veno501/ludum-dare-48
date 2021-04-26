@@ -5,6 +5,9 @@ public class ParticleCollectables : MonoBehaviour
 {
 	ParticleSystem ps;
 	//List<ParticleCollisionEvent> collisionEvents;
+	// List<ParticleSystem.Particle> particleCache = new List<ParticleSystem.Particle>(10);
+	ParticleSystem.Particle[] particleCache = new ParticleSystem.Particle[particlesSpawned];
+	const int particlesSpawned = 10;
 
 	void Start()
 	{
@@ -33,7 +36,7 @@ public class ParticleCollectables : MonoBehaviour
 	{
 		// add minerals
 		// StatsManager.Score += scoreOnCollect;
-		Player.instance.stats.CollectSample(0.1f);
+		Player.instance.stats.CollectSample(1.0f / particlesSpawned);
 	}
 
 	void OnParticleTrigger()
@@ -44,9 +47,21 @@ public class ParticleCollectables : MonoBehaviour
 		for (int i = 0; i < numEnter; i++)
 		{
 			OnCollectParticle(enter[i]);
+			KillParticle(i);
 		}
 
 		ps.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
+	}
+
+	void KillParticle(int _index)
+	{
+		// var emitter = ps.emission;
+		ps.GetParticles(particleCache, ps.particleCount);
+		// particleCache = emitter.particles.ToList();
+		// particleCache.Remove(_index);
+		particleCache[_index] = particleCache[ps.particleCount-1];
+		ps.SetParticles(particleCache, ps.particleCount-1);
+        // emitter.particles = particleCache.ToArray();
 	}
 
 	//void OnParticleCollision (GameObject other)

@@ -23,7 +23,7 @@ public class BlockSwitchTrigger : MonoBehaviour
             else if (direction == 'r') {
                 Level.instance.SwitchBlock(Level.instance.currentBlock.blockRight);
             }
-            else if (direction == 'u') {
+            else if (direction == 'd') {
                 if (Player.instance.stats.samplesCollected >= Player.instance.stats.samplesRequired) {
                     Level.instance.SwitchLayer();
                 }

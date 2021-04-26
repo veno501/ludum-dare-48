@@ -18,7 +18,6 @@ private bool enableStart = false;
 void Start()
 {
         StartCoroutine(EnableStart());
-
 }
 
 void Update()

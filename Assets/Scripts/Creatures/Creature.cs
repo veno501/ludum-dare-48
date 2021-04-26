@@ -22,7 +22,7 @@ public class Creature : MonoBehaviour
     protected void CheckCanSeePlayer()
     {
         RaycastHit2D hit = Physics2D.Linecast(rbody.position, Player.rb.position, canSeePlayerLayerMask);
-        Debug.Log(hit.transform.gameObject.name);
+        // Debug.Log(hit.transform.gameObject.name);
         canSeePlayer = hit.transform == Player.tr;
     }
 

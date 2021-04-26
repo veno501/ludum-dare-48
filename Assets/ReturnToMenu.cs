@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ReturnToMenu : MonoBehaviour
 {
@@ -10,23 +11,25 @@ public GameObject continueTextParent;
 
 public UnityEngine.UI.Text depthCounterScoreText;
 
-private bool playerIsDead = false;
-
-void Update()
-{
-        if(playerIsDead && Input.anyKey)
-        {
-                // fade to main Scene
-                Debug.Log("Return to main menu!");
-        }
-}
-
 public void OnEliminated()
 {
         depthCounterScoreText.text = Level.instance.currentLayer.depth + "00 m";
         depthCounterTextParent.SetActive(true);
         continueTextParent.SetActive(true);
         player.SetActive(false);
-        playerIsDead = true;
+
+        StartCoroutine(WaitForConfirmation());
+}
+
+IEnumerator WaitForConfirmation()
+{
+        yield return new WaitForSeconds(1.0f);
+        while (!Input.anyKeyDown)
+        {
+                yield return null;
+        }
+        StartCoroutine(Level.instance.FadeOut(1.5f));
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(0);
 }
 }

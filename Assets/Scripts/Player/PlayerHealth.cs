@@ -75,23 +75,28 @@ public void Reset()
 
 public void TakeDamage(Damage _damage)
 {
-								if (/*isInvulnerable || */ Health == 0)
-																return;
+	if (GameObject.FindWithTag("TutorialLevel") != null)
+	{
+		return;
+	}
 
-								float damageModified = _damage.amount / resistanceModifier;
+	if (/*isInvulnerable || */ Health == 0)
+									return;
 
-								// if (damageModified > Shield)
-								// {
-								Health -= damageModified /* - Shield*/;
-								// }
-								// Shield -= damageModified;
+	float damageModified = _damage.amount / resistanceModifier;
 
-								// UIManager.OnUpdateHealth(this);
+	// if (damageModified > Shield)
+	// {
+	Health -= damageModified /* - Shield*/;
+	// }
+	// Shield -= damageModified;
 
-								if (Health == 0)
-								{
-																OnEliminated(_damage);
-								}
+	// UIManager.OnUpdateHealth(this);
+
+	if (Health == 0)
+	{
+									OnEliminated(_damage);
+	}
 }
 
 // public void OnUpdateScore(int scoreDifference)
@@ -108,6 +113,7 @@ public void TakeDamage(Damage _damage)
 void OnEliminated (Damage _damage)
 {
 								Debug.Log("Player has been eliminated!");
+								Effects.instance.SmallExplosion(transform.position);
 								GameObject returnToMenu = GameObject.FindGameObjectsWithTag("returnToMenu")[0];
 								returnToMenu.GetComponent<ReturnToMenu>().OnEliminated();
 								// MenuManager.InitEndgameMenu();

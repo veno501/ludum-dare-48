@@ -130,6 +130,9 @@ public class Level : MonoBehaviour
             fadeUI.color = c;
             yield return null;
         }
+        Color c1 = fadeUI.color;
+        c1.a = 1.0f;
+        fadeUI.color = c1;
     }
 
     public IEnumerator FadeIn(float _t)
@@ -141,6 +144,9 @@ public class Level : MonoBehaviour
             fadeUI.color = c;
             yield return null;
         }
+        Color c1 = fadeUI.color;
+        c1.a = 0.0f;
+        fadeUI.color = c1;
     }
 
     void EnableTriggers()

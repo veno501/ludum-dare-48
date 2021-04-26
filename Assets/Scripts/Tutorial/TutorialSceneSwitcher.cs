@@ -12,8 +12,9 @@ public float fadeDuration = 0.5f;
 
 public GameObject mainMenu;
 public GameObject tutorialLevel;
+public Animator playerStartAnimation;
 
-private bool tutorialStarted = false;
+private static bool tutorialStarted = false;
 private bool enableStart = false;
 
 public static TutorialSceneSwitcher instance;
@@ -21,17 +22,37 @@ public static TutorialSceneSwitcher instance;
 void Start()
 {
         instance = this;
-        StartCoroutine(EnableStartText());
+
+        if (tutorialStarted) {
+                StartCoroutine(EnableTryAgain());
+        }
+        else {
+                StartCoroutine(EnableStartText());
+        }
 }
 
 void Update()
 {
-        if (Input.anyKey && tutorialStarted == false && enableStart)
+        if (Input.anyKeyDown && tutorialStarted == false && enableStart)
         {
                 tutorialStarted = true;
-                StartCoroutine(FadeOut(fadeDuration));
-                Invoke("StartTutorial", fadeDuration);
+                StartCoroutine(StartTutorialAnimation());
         }
+}
+
+IEnumerator EnableTryAgain()
+{
+        yield return null;
+}
+
+IEnumerator StartTutorialAnimation()
+{
+        playerStartAnimation.enabled = true;
+        yield return new WaitForSeconds(2f);
+        
+        StartCoroutine(FadeOut(fadeDuration));
+        yield return new WaitForSeconds(fadeDuration);
+        StartTutorial();
 }
 
 void StartTutorial()
@@ -43,7 +64,7 @@ void StartTutorial()
 
 IEnumerator EnableStartText()
 {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(4.5f);
         startText.gameObject.SetActive(true);
         enableStart = true;
 }
@@ -64,6 +85,9 @@ public IEnumerator FadeOut(float _t)
                 fadeUI.color = c;
                 yield return null;
         }
+        Color c1 = fadeUI.color;
+        c1.a = 1.0f;
+        fadeUI.color = c1;
 }
 
 public IEnumerator FadeIn(float _t)
@@ -75,5 +99,8 @@ public IEnumerator FadeIn(float _t)
                 fadeUI.color = c;
                 yield return null;
         }
+        Color c1 = fadeUI.color;
+        c1.a = 0.0f;
+        fadeUI.color = c1;
 }
 }

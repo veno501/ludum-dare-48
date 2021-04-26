@@ -26,7 +26,8 @@ public class Sample : MonoBehaviour
             // ob.GetComponent<Rigidbody2D>().velocity = (Player.tr.position - transform.position).normalized * 5f;
 
 		    // = transform.TransformDirection(recoil);
-            ob.transform.SetParent(Level.instance.currentBlock.root);
+            if (Level.instance != null)
+                ob.transform.SetParent(Level.instance.currentBlock.root);
         
             ob.GetComponent<Rigidbody2D>().velocity = ((Player.rb.position-(Vector2)transform.position) * 
                 (Random.insideUnitCircle*1f)).normalized * 8f;

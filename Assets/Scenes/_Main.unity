@@ -1342,8 +1342,9 @@ MonoBehaviour:
       data:
         texture: {fileID: 0}
         enemySpawnPoints: []
-        sampleSpawnPoints: []
         entryPoints: []
+        sampleSpawnPoints: []
+        sampleSpawnPointsRotations: 
       root: {fileID: 0}
     depth: 0
   currentBlock:
@@ -1353,8 +1354,9 @@ MonoBehaviour:
     data:
       texture: {fileID: 0}
       enemySpawnPoints: []
-      sampleSpawnPoints: []
       entryPoints: []
+      sampleSpawnPoints: []
+      sampleSpawnPointsRotations: 
     root: {fileID: 0}
   fadeDuration: 0.5
   fadeUI: {fileID: 2107653157}

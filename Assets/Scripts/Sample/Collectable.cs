@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 using Weapons;
+using System.Collections.Generic;
 
 public class Collectable : MonoBehaviour
 {
 	public float pickupRange = 7f;
+	public List<Sprite> sprites = new List<Sprite>();
 	Rigidbody2D rbody;
 
 	void Awake()
 	{
 		rbody = GetComponent<Rigidbody2D>();
+		GetComponentInChildren<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Count)];
 	}
 
 	void FixedUpdate()
@@ -31,7 +34,7 @@ public class Collectable : MonoBehaviour
 	void OnCollected()
 	{
 		// add mineral
-		Player.instance.stats.CollectSample(0.34f);
+		Player.instance.stats.CollectSample(0.20f);
 		Destroy(gameObject);
 	}
 }

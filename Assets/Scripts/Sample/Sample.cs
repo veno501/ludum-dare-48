@@ -19,9 +19,10 @@ public class Sample : MonoBehaviour
 
     void DropCollectable()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 5; i++)
         {
-            GameObject ob = Instantiate(collectable, transform.position, Quaternion.Euler(0,0,Random.Range(0,360))) as GameObject;
+            Quaternion rot = Quaternion.Euler(0,0,(int)(Random.Range(0,360)/90)*90);
+            GameObject ob = Instantiate(collectable, transform.position, rot) as GameObject;
             // ob.GetComponent<Rigidbody2D>().velocity = (Player.tr.position - transform.position).normalized * 5f;
 
 		    // = transform.TransformDirection(recoil);

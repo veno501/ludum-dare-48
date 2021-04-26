@@ -17,13 +17,14 @@ protected override void Awake()
 public void CollectSample(float amount)
 {
         samplesCollected += amount;
-        if (samplesCollected >= samplesRequired/2)
-        {
-                samplesCollected = 0f;
-                OnEnoughSamplesCollected();
-        }
+
         // update UI
         collectedText.text = "" + (int)samplesCollected;
+
+        if (samplesCollected >= samplesRequired)
+        {
+                OnEnoughSamplesCollected();
+        }
 }
 
 void OnEnoughSamplesCollected()

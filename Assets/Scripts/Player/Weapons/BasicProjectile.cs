@@ -35,6 +35,7 @@ namespace Weapons
         void OnTriggerEnter2D(Collider2D hit)
         {
             if (hit.transform == Player.tr) return;
+            if (hit.GetComponent<Projectile>()) return;
             // if (hit.GetComponent<EnemyController>() != null)
             // {
             //     DealDamage(hit.GetComponent<EnemyController>());

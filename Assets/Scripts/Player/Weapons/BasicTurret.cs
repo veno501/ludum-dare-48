@@ -29,7 +29,7 @@ namespace Weapons
 		{
 			// var ob = currentObjectPool.GetObject();
 			var ob = Instantiate(projectile) as GameObject;
-			ob.GetComponent<BasicProjectile>().Spawn(this, FireDelay * 3f);
+			ob.GetComponent<BasicProjectile>().Spawn(this, 0.3f/*FireDelay * 3f*/);
 
 			controller.movement.AddRecoil(kickbackForce);
 

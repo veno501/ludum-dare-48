@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 934162125698960377}
   - component: {fileID: 934162125698960379}
   - component: {fileID: 934162125698960376}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934162125698960134}
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.1, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 7}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 3981301990121566670}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &934162125698960379
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -71,9 +71,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1797812971137684008, guid: 1591769ef5e7c6748a914de68211713a,
+  m_Sprite: {fileID: -2902970233842926932, guid: ee8c199cfe55c0083969e8c186108561,
     type: 3}
-  m_Color: {r: 0, g: 0.3962264, b: 0.2018512, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -93,7 +93,7 @@ Animator:
   m_GameObject: {fileID: 934162125698960134}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f0e9b546e23d8dd4b902e11849461bbc, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1f41a164f5e77bea7803334e738f8a53, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 3981301990121566668}
   - component: {fileID: 7494574795434870126}
   - component: {fileID: 369749569151995128}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: jellyfish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ MonoBehaviour:
   health: 1
   canSeePlayerLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 513
   creatureLayer:
     serializedVersion: 2
     m_Bits: 2048
@@ -193,4 +193,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.3

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 595577328739342653}
   - component: {fileID: 595577328739342655}
   - component: {fileID: 595577328739342652}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 3743978917697004302}
   - component: {fileID: 7833785036365895594}
   - component: {fileID: 113918939029397052}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: charger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ MonoBehaviour:
   health: 1
   canSeePlayerLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 513
   creatureLayer:
     serializedVersion: 2
     m_Bits: 2048

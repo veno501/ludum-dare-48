@@ -84,7 +84,15 @@ public class Charger : Creature
 	{
 		Vector2 desired = target.position - rbody.position;
 		Vector2 separate = SeparationForce(Random.Range(1.5f, 2.5f), nearby);
-		SteerInDirection(desired.normalized + separate, 500f, maxVelocity);
+		
+		CheckCanSeePlayer();
+		if (!canSeePlayer)
+		{
+			SteerInDirection(Random.insideUnitCircle + separate, 5f, maxVelocity);
+		}
+		else {
+			SteerInDirection(desired.normalized + separate, 500f, maxVelocity);
+		}
 
 		timer -= Time.deltaTime;
 		if (timer <= 0 && desired.sqrMagnitude < targetingRange * targetingRange && 

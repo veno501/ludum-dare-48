@@ -11,10 +11,12 @@ public class Jellyfish : Creature
 
     float dashTimer;
     Rigidbody2D target;
+    Animator anim;
 
     void Start()
 	{
         rbody = GetComponent<Rigidbody2D>();
+        anim = GetComponentInChildren<Animator>();
         dashTimer = dashDelay;
 
 		if (target == null)
@@ -28,6 +30,7 @@ public class Jellyfish : Creature
         {
             dashTimer = dashDelay;
             CheckCanSeePlayer();
+            anim.SetTrigger("swim");
             Dash();
         }
         UpdateRotation();

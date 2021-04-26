@@ -22,7 +22,8 @@ public class Creature : MonoBehaviour
     protected void CheckCanSeePlayer()
     {
         RaycastHit2D hit = Physics2D.Linecast(rbody.position, Player.rb.position, canSeePlayerLayerMask);
-        canSeePlayer = (hit != null);
+        Debug.Log(hit.transform.gameObject.name);
+        canSeePlayer = hit.transform == Player.tr;
     }
 
     public void TakeDamage(Damage _damage)

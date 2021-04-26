@@ -28,7 +28,7 @@ public GameObject GenerateColliders(Block _block)
                 for(int y = 0; y < imageWidth; y++)
                 {
                         Color pixel = _block.data.texture.GetPixel(y, x);
-                        if (pixel == Color.black)
+                        if (pixel == Color.black || pixel == Color.blue)
                         {
                                 Vector2 spawnPosition = new Vector3(-imageWidth/2+y, -imageHeight/2+x, 0) + new Vector3(0.5f, 0.5f, 0f);
                                 GameObject ob = Instantiate(tilePrefab, spawnPosition, Quaternion.identity) as GameObject;
@@ -51,8 +51,8 @@ public void SpawnEnemies(Block _block)
         List<Vector3> points = _block.data.enemySpawnPoints;
         foreach (Vector3 point in points)
         {
-                GameObject ob = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], 
-                        new Vector3(point.x-imageWidth/2, point.y-imageHeight/2, 0f), Quaternion.identity) as GameObject;
+                GameObject ob = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)],
+                                            new Vector3(point.x-imageWidth/2, point.y-imageHeight/2, 0f), Quaternion.identity) as GameObject;
 
                 ob.transform.SetParent(enemyRoot.transform);
         }
@@ -64,12 +64,17 @@ public void SpawnSamples(Block _block)
         sampleRoot.transform.SetParent(_block.root);
 
         List<Vector3> points = _block.data.sampleSpawnPoints;
+
+        int index = 0;
+
         foreach (Vector3 point in points)
         {
-                GameObject ob = Instantiate(samplePrefab, 
-                        new Vector3(point.x-imageWidth/2+0.5f, point.y-imageHeight/2+0.5f, 0f), Quaternion.identity) as GameObject;
+                GameObject ob = Instantiate(samplePrefab,new Vector3(point.x-imageWidth/2+0.5f, point.y-imageHeight/2+0.5f, 0f), Quaternion.Euler(0, 0, _block.data.sampleSpawnPointsRotations[index])) as GameObject;
+                Debug.Log(_block.data.sampleSpawnPointsRotations[index]);
 
                 ob.transform.SetParent(sampleRoot.transform);
+
+                index++;
         }
 }
 

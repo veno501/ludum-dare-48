@@ -32,7 +32,6 @@ public class Flocker : Creature
 	
 	Collider2D[] nearby;
     Rigidbody2D target;
-    Rigidbody2D rbody;
 
 	// Renderer rend;
 	int frameCounter;

@@ -24,7 +24,6 @@ public class Charger : Creature
 
 	State currentState = State.Seeking;
     Rigidbody2D target;
-    Rigidbody2D rbody;
 
     void Start()
 	{

@@ -149,6 +149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
+  canSeePlayerLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   creatureLayer:
     serializedVersion: 2
     m_Bits: 2048

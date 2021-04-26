@@ -1338,15 +1338,18 @@ MonoBehaviour:
     entryBlock:
       isEntryBlock: 0
       isExitBlock: 0
+      isCleared: 0
       data:
         texture: {fileID: 0}
         enemySpawnPoints: []
         sampleSpawnPoints: []
         entryPoints: []
       root: {fileID: 0}
+    depth: 0
   currentBlock:
     isEntryBlock: 0
     isExitBlock: 0
+    isCleared: 0
     data:
       texture: {fileID: 0}
       enemySpawnPoints: []
@@ -1752,5 +1755,35 @@ PrefabInstance:
       propertyPath: collectedText
       value: 
       objectReference: {fileID: 75115870}
+    - target: {fileID: 9099502050589749670, guid: 9494362b375cfd283b7a5c3da32ad32e,
+        type: 3}
+      propertyPath: fireRPM
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099502050589749670, guid: 9494362b375cfd283b7a5c3da32ad32e,
+        type: 3}
+      propertyPath: spreadAngle
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099502050589749670, guid: 9494362b375cfd283b7a5c3da32ad32e,
+        type: 3}
+      propertyPath: kickbackForce
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099502050589749670, guid: 9494362b375cfd283b7a5c3da32ad32e,
+        type: 3}
+      propertyPath: projectileDrag
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099502050589749670, guid: 9494362b375cfd283b7a5c3da32ad32e,
+        type: 3}
+      propertyPath: heatAndCoolSpeed.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099502050589749670, guid: 9494362b375cfd283b7a5c3da32ad32e,
+        type: 3}
+      propertyPath: projectileVelocity
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9494362b375cfd283b7a5c3da32ad32e, type: 3}

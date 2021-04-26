@@ -5,7 +5,9 @@ using UnityEngine;
 public class Creature : MonoBehaviour
 {
     public float health = 1f;
-    // Rigidbody2D rbody;
+    public LayerMask canSeePlayerLayerMask;
+    protected bool canSeePlayer;
+    protected Rigidbody2D rbody;
 
     // void Awake()
     // {
@@ -16,6 +18,12 @@ public class Creature : MonoBehaviour
     // {
     //     rbody.velocity = new Vector2(Mathf.Sin(Time.time), Mathf.Cos(Time.time)) * 2f;
     // }
+
+    protected void CheckCanSeePlayer()
+    {
+        RaycastHit2D hit = Physics2D.Linecast(rbody.position, Player.rb.position, canSeePlayerLayerMask);
+        canSeePlayer = (hit != null);
+    }
 
     public void TakeDamage(Damage _damage)
     {

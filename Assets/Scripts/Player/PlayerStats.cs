@@ -35,7 +35,7 @@ public void ResetCollectedSamples()
 
 void OnEnoughSamplesCollected()
 {
-        GameObject tutorialLeveL = GameObject.Find("TutorialLevel");
+        GameObject tutorialLeveL = GameObject.FindWithTag("TutorialLevel");
         if (tutorialLeveL != null)
         {
                 tutorialLeveL.GetComponent<TutorialLevel>().EnableDeeperText();

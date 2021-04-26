@@ -9,6 +9,7 @@ public Block blockLeft, blockRight;
 
 public bool isEntryBlock;
 public bool isExitBlock;
+public bool isCleared;
 
 // public int numOfMinerals;
 // public int numOfEnemies;

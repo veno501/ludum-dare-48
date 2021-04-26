@@ -27,7 +27,7 @@ public List<Texture2D> LRU = new List<Texture2D>();
 // Block secondEntryBlock;
 // Block firstEntryBlock;
 
-public Layer GenerateLayer()
+public Layer GenerateLayer(float _depth)
 {
         List<Block> blocks = new List<Block>();
         // Block entryBlock = layers[layers.Count-1].entryBlockLower;
@@ -80,7 +80,7 @@ public Layer GenerateLayer()
         }
 
         // layers.Add(new Layer(blocks, entryBlock, entryBlockLower));
-        Layer newLayer = new Layer(blocks, entryBlock);
+        Layer newLayer = new Layer(blocks, entryBlock, _depth);
         return newLayer;
 }
 

@@ -14,7 +14,7 @@ void OnTriggerEnter2D(Collider2D hit)
         // isEnabled = false;
 
         if (hit.GetComponentInParent<Player>()) {
-                Debug.Log("Switching block \'" + direction + "\'");
+                // Debug.Log("Switching block \'" + direction + "\'");
 
                 // Level.instance.SwitchBlock(Level.instance.currentBlock.block);
                 if (direction == 'l') {
@@ -25,7 +25,7 @@ void OnTriggerEnter2D(Collider2D hit)
                 }
                 else if (direction == 'd') {
                         if (Player.instance.stats.samplesCollected >= Player.instance.stats.samplesRequired) {
-                                if (GameObject.Find("TutorialLevel") && TutorialLevel.tutorialFinished == false)
+                                if (GameObject.FindWithTag("TutorialLevel") && TutorialLevel.tutorialFinished == false)
                                 {
                                         TutorialLevel.tutorialFinished = true;
                                         // switch scene

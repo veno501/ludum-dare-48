@@ -11,7 +11,6 @@ public class Jellyfish : Creature
 
     float dashTimer;
     Rigidbody2D target;
-    Rigidbody2D rbody;
 
     void Start()
 	{
@@ -28,6 +27,7 @@ public class Jellyfish : Creature
         if (dashTimer <= 0f)
         {
             dashTimer = dashDelay;
+            CheckCanSeePlayer();
             Dash();
         }
         UpdateRotation();
@@ -43,6 +43,11 @@ public class Jellyfish : Creature
         Vector2 randomDir = Random.insideUnitCircle.normalized;
         Vector2 playerDir = (target.position - rbody.position).normalized;
         Vector2 avoidDir = SeparationForce(3f, nearby);
+
+        if (!canSeePlayer)
+        {
+            playerDir = Vector2.zero;
+        }
 
         rbody.AddForce((randomDir * 0.8f + playerDir * 1.2f + avoidDir).normalized * dashVelocity, ForceMode2D.Impulse);
     }

@@ -34,7 +34,9 @@ public class Level : MonoBehaviour
     {
         Player.instance.stats.ResetCollectedSamples();
         // generate layer data, set new depth score, difficulty
-        currentLayer = layerGenerator.GenerateLayer();
+        float currentDepth = currentLayer == null ? 1f : currentLayer.depth;
+        currentLayer = layerGenerator.GenerateLayer(currentDepth + 1.0f);
+        Debug.Log("Depth: -" + currentLayer.depth + "00m");
         currentBlock = currentLayer.entryBlock;
         previousTriggerSide = 'd';
         StartBlock();
@@ -59,7 +61,10 @@ public class Level : MonoBehaviour
         // currentBlock = _block;
         currentBlock.root = blockGenerator.GenerateColliders(currentBlock).transform;
         blockGenerator.SpawnEnemies(currentBlock);
-        blockGenerator.SpawnSamples(currentBlock);
+        if (!currentBlock.isCleared)
+        {
+            blockGenerator.SpawnSamples(currentBlock);
+        }
         blockGenerator.SetPlayerToSpawnPoint(currentBlock, previousTriggerSide);
 
         Invoke("EnableTriggers", 2f);
@@ -69,13 +74,31 @@ public class Level : MonoBehaviour
         // set player position, velocity for entry
         // disable entrance tunnel for a few seconds
     }
-    
+
     public void SwitchBlock(Block _block, char _triggerSide)
     {
         // fade out
         // scrap current block
         // current block is next block
         previousTriggerSide = _triggerSide;
+
+        GameObject[] samples = GameObject.FindGameObjectsWithTag("Sample");
+        if (samples.Length == 0) currentBlock.isCleared = true;
+        Vector3[] pointsCopy = currentBlock.data.sampleSpawnPoints.ToArray();
+        foreach (Vector3 point in pointsCopy)
+        {
+            bool stillAlive = false;
+            foreach (GameObject ob in samples)
+            {
+                if (ob.transform.position.x+blockGenerator.imageWidth/2-0.5f == point.x &&
+                    ob.transform.position.y+blockGenerator.imageHeight/2-0.5f == point.y)
+                {
+                    stillAlive = true;
+                }
+            }
+            if (!stillAlive)
+                currentBlock.data.sampleSpawnPoints.Remove(point);
+        }
 
         StartCoroutine(FadeOut(fadeDuration));
         Destroy(currentBlock.root.gameObject, fadeDuration);

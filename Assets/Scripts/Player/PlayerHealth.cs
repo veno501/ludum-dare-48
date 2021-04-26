@@ -4,129 +4,132 @@ using UnityEngine.UI;
 
 public class PlayerHealth : PlayerModule
 {
-	public float maxHealth = 1f;
-	// public float MaxShield
-	// {
-	// 	get { return maxHealth * 0.25f; }
-	// }
-	
-	float health;
-	public float Health
-	{
-		get { return health; }
-		set
-		{
-			health = Mathf.Clamp(value, 0, maxHealth);
-			if (bar)
-			{
-				bar.maxValue = maxHealth;
-				bar.value = health;
-			}
-		}
-	}
+public float maxHealth = 1f;
+// public float MaxShield
+// {
+// 	get { return maxHealth * 0.25f; }
+// }
 
-	// float shield;
-	// public float Shield
-	// {
-	// 	get { return shield; }
-	// 	set
-	// 	{
-	// 		shield = Mathf.Clamp(value, 0, Mathf.Min(maxHealth - Health, MaxShield));
-	// 	}
-	// }
-	// public float shieldMultiplier = 1f;
+float health;
+public float Health
+{
+								get { return health; }
+								set
+								{
+																health = Mathf.Clamp(value, 0, maxHealth);
+																if (bar)
+																{
+																								bar.maxValue = maxHealth;
+																								bar.value = health;
+																}
+								}
+}
 
-	public float resistanceModifier = 1f;
-	public Slider bar;
+// float shield;
+// public float Shield
+// {
+// 	get { return shield; }
+// 	set
+// 	{
+// 		shield = Mathf.Clamp(value, 0, Mathf.Min(maxHealth - Health, MaxShield));
+// 	}
+// }
+// public float shieldMultiplier = 1f;
 
-	// [HideInInspector]
-	// public bool isInvulnerable;
-	// public bool isGhost;
+public float resistanceModifier = 1f;
+public Slider bar;
 
-	protected override void Awake()
-	{
-		base.Awake();
-		Reset();
-	}
+// [HideInInspector]
+// public bool isInvulnerable;
+// public bool isGhost;
 
-	// public void OnTriggerEnter2D(Collider2D hit)
-	// {
-	// 	if (hit.GetComponentInParent<Creature>()) {
-	// 		hit.GetComponentInParent<Creature>().TakeDamage(new Damage(100f));
-	// 	}
-	// 	this.TakeDamage(new Damage(1.0f));
-	// }
+protected override void Awake()
+{
+								base.Awake();
+								Reset();
+}
 
-	public void OnCollisionEnter2D(Collision2D hit)
-	{
-		if (hit.transform.GetComponentInParent<Creature>()) {
-			hit.transform.GetComponentInParent<Creature>().TakeDamage(new Damage(100f));
-		}
-		this.TakeDamage(new Damage(1.0f));
-		
-		// Player.rb.velocity = hit.
-	}
+// public void OnTriggerEnter2D(Collider2D hit)
+// {
+// 	if (hit.GetComponentInParent<Creature>()) {
+// 		hit.GetComponentInParent<Creature>().TakeDamage(new Damage(100f));
+// 	}
+// 	this.TakeDamage(new Damage(1.0f));
+// }
 
-	public void Reset()
-	{
-		Health = maxHealth;
-		// UIManager.OnUpdateHealth(this);
-	}
+public void OnCollisionEnter2D(Collision2D hit)
+{
+								if (hit.transform.GetComponentInParent<Creature>()) {
+																hit.transform.GetComponentInParent<Creature>().TakeDamage(new Damage(100f));
+								}
+								this.TakeDamage(new Damage(1.0f));
 
-	public void TakeDamage(Damage _damage)
-	{
-		if (/*isInvulnerable || */Health == 0)
-			return;
+								// Player.rb.velocity = hit.
+}
 
-		float damageModified = _damage.amount / resistanceModifier;
+public void Reset()
+{
+								Health = maxHealth;
+								// UIManager.OnUpdateHealth(this);
+}
 
-		// if (damageModified > Shield)
-		// {
-			Health -= damageModified/* - Shield*/;
-		// }
-		// Shield -= damageModified;
+public void TakeDamage(Damage _damage)
+{
+								if (/*isInvulnerable || */ Health == 0)
+																return;
 
-		// UIManager.OnUpdateHealth(this);
+								float damageModified = _damage.amount / resistanceModifier;
 
-		if (Health == 0)
-		{
-			OnEliminated(_damage);
-		}
-	}
+								// if (damageModified > Shield)
+								// {
+								Health -= damageModified /* - Shield*/;
+								// }
+								// Shield -= damageModified;
 
-	// public void OnUpdateScore(int scoreDifference)
-	// {
-	// 	AddShield(scoreDifference);
-	// }
+								// UIManager.OnUpdateHealth(this);
 
-	// void AddShield (int score)
-	// {
-	// 	Shield += score * shieldMultiplier * 0.01f;
-	// 	// UIManager.OnUpdateHealth(this);
-	// }
+								if (Health == 0)
+								{
+																OnEliminated(_damage);
+								}
+}
 
-	void OnEliminated (Damage _damage)
-	{
-		// MenuManager.InitEndgameMenu();
-	}
+// public void OnUpdateScore(int scoreDifference)
+// {
+// 	AddShield(scoreDifference);
+// }
 
-	// public void SetInvulnerableForSeconds (float _t)
-	// {
-	// 	if (!isInvulnerable)
-	// 	{
-	// 		// Start invulnerable effect
-	// 	}
+// void AddShield (int score)
+// {
+// 	Shield += score * shieldMultiplier * 0.01f;
+// 	// UIManager.OnUpdateHealth(this);
+// }
 
-	// 	StartCoroutine(SetInvulnerableForSecondsCoroutine(_t));
-	// }
+void OnEliminated (Damage _damage)
+{
+								Debug.Log("Player has been eliminated!");
+								GameObject returnToMenu = GameObject.FindGameObjectsWithTag("returnToMenu")[0];
+								returnToMenu.GetComponent<ReturnToMenu>().OnEliminated();
+								// MenuManager.InitEndgameMenu();
+}
 
-	// IEnumerator SetInvulnerableForSecondsCoroutine (float _t)
-	// {
-	// 	isInvulnerable = true;
+// public void SetInvulnerableForSeconds (float _t)
+// {
+// 	if (!isInvulnerable)
+// 	{
+// 		// Start invulnerable effect
+// 	}
 
-	// 	yield return new WaitForSeconds(_t);
+// 	StartCoroutine(SetInvulnerableForSecondsCoroutine(_t));
+// }
 
-	// 	isInvulnerable = false;
-	// 	// Stop invulnerable effect
-	// }
+// IEnumerator SetInvulnerableForSecondsCoroutine (float _t)
+// {
+// 	isInvulnerable = true;
+
+// 	yield return new WaitForSeconds(_t);
+
+// 	isInvulnerable = false;
+// 	// Stop invulnerable effect
+// }
 }

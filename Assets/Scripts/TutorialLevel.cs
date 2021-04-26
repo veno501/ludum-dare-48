@@ -10,12 +10,21 @@ public GameObject deeperText;
 
 public static bool tutorialFinished = false;
 
+private bool advanceTextShowed = false;
+
 void Start()
 {
         Player.tr.position = new Vector3(0.2f, 7.3f, 0f);
         Player.instance.stats.samplesRequired = 1f;
         Player.instance.stats.requiredText.text = "1";
-        StartCoroutine(EnableMineralsTextCoroutine());
+}
+
+void Update() {
+        if (advanceTextShowed == false && Player.tr.position.y < 4f)
+        {
+                advanceTextShowed = true;
+                mineralsText.SetActive(true);
+        }
 }
 
 public void EnableDeeperText()
@@ -29,11 +38,5 @@ public void EnableDeeperText()
         {
                 trigger.isEnabled = true;
         }
-}
-
-IEnumerator EnableMineralsTextCoroutine()
-{
-        yield return new WaitForSeconds(1);
-        mineralsText.SetActive(true);
 }
 }

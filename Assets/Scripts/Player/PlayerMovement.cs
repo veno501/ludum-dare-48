@@ -25,12 +25,6 @@ public class PlayerMovement : PlayerModule
 
 	protected void FixedUpdate()
 	{
-		if (!active)
-		{
-			rbody.velocity -= rbody.velocity * Time.fixedDeltaTime * 5f;
-			return;
-		}
-
 		// if (ArenaManager.isOutOfBounds(rbody.position))
 		// {
 		// 	Vector2 arenaBoundsNormal = (ArenaManager.arenaCenter - rbody.position).normalized;

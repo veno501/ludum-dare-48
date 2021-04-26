@@ -63,6 +63,8 @@ public class PlayerHealth : PlayerModule
 			hit.transform.GetComponentInParent<Creature>().TakeDamage(new Damage(100f));
 		}
 		this.TakeDamage(new Damage(1.0f));
+		
+		// Player.rb.velocity = hit.
 	}
 
 	public void Reset()

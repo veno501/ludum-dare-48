@@ -46,6 +46,7 @@ namespace Weapons
             if (hit.GetComponentInParent<Sample>()) {
                 hit.GetComponentInParent<Sample>().TakeDamage(damage);
             }
+            if (Effects.instance) Effects.instance.VerySmallExplosion(transform.position);
             Destroy(this.gameObject);
         }
 

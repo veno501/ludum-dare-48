@@ -641,6 +641,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smallExplosion: {fileID: 3640163151425525042, guid: 6eba9041b56daa94083e81badb01d6ca,
     type: 3}
+  verySmallExplosion: {fileID: 5127091390990390962, guid: c25b4fcbb9004784ea66db3724da251f,
+    type: 3}
+  clips: []
 --- !u!4 &428161881
 Transform:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public float fadeDuration = 0.5f;
 public GameObject mainMenu;
 public GameObject tutorialLevel;
 public Animator playerStartAnimation;
+public GameObject tryAgainWreck;
 
 private static bool tutorialStarted = false;
 private bool enableStart = false;
@@ -42,7 +43,21 @@ void Update()
 
 IEnumerator EnableTryAgain()
 {
-        yield return null;
+        StartCoroutine(FadeIn(fadeDuration));
+
+        tryAgainWreck.SetActive(true);
+        startText.gameObject.SetActive(true);
+        startText.text = "Press a key to try again";
+        
+        while (!Input.anyKeyDown)
+        {
+                yield return null;
+        }
+        
+        playerStartAnimation.enabled = true;
+        yield return new WaitForSeconds(2f);
+
+        StartCoroutine(LoadMainScene());
 }
 
 IEnumerator StartTutorialAnimation()
@@ -64,6 +79,7 @@ void StartTutorial()
 
 IEnumerator EnableStartText()
 {
+        StartCoroutine(FadeIn(fadeDuration));
         yield return new WaitForSeconds(4.5f);
         startText.gameObject.SetActive(true);
         enableStart = true;
@@ -71,8 +87,8 @@ IEnumerator EnableStartText()
 
 public static IEnumerator LoadMainScene()
 {
-        instance.StartCoroutine(instance.FadeOut(1.5f));
-        yield return new WaitForSeconds(1.5f);
+        instance.StartCoroutine(instance.FadeOut(1.0f));
+        yield return new WaitForSeconds(1.0f);
         SceneManager.LoadScene(1);
 }
 
@@ -102,5 +118,10 @@ public IEnumerator FadeIn(float _t)
         Color c1 = fadeUI.color;
         c1.a = 0.0f;
         fadeUI.color = c1;
+}
+
+public void QuitGame()
+{
+        Application.Quit();
 }
 }

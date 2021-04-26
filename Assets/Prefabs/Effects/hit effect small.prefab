@@ -150,7 +150,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1
+      scalar: 0.2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -248,7 +248,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5
+      scalar: 0.4
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -627,7 +627,7 @@ ParticleSystem:
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 1
+    radiusThickness: 0.01
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
@@ -710,7 +710,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.01
+      value: 0.0001
       mode: 0
       spread: 0
       speed:
@@ -1285,8 +1285,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0.8235294, b: 0.2552441, a: 1}
-        key1: {r: 0.2102076, g: 0.32449287, b: 0.5955882, a: 1}
+        key0: {r: 0.68744713, g: 0.6316305, b: 0.8867924, a: 1}
+        key1: {r: 0.26722702, g: 0.2538715, b: 0.3301887, a: 1}
         key2: {r: 0.17149654, g: 0.3866633, b: 0.89705884, a: 0}
         key3: {r: 0.17149654, g: 0.3866633, b: 0.89705884, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4885,7 +4885,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 72983ebfe97f34afc8fcf0f998084a44, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 43546ce6124f45b44a8b5a5f67b1b767, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.85
   m_Pitch: 1
@@ -5122,8 +5122,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 15
-      minScalar: 10
+      scalar: 4
+      minScalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5599,7 +5599,7 @@ ParticleSystem:
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 1
+    radiusThickness: 0
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
@@ -5682,7 +5682,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 0.04
       mode: 0
       spread: 0
       speed:
@@ -5739,7 +5739,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
     arc:
-      value: 90
+      value: 360
       mode: 0
       spread: 0
       speed:

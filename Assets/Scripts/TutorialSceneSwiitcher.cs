@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SceneSwitcher : MonoBehaviour
+public class TutorialSceneSwitcher : MonoBehaviour
 {
 public Image fadeUI;
 public Text startText;
@@ -18,6 +18,7 @@ private bool enableStart = false;
 void Start()
 {
         StartCoroutine(EnableStart());
+
 }
 
 void Update()

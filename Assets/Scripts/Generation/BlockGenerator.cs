@@ -70,7 +70,6 @@ public void SpawnSamples(Block _block)
         foreach (Vector3 point in points)
         {
                 GameObject ob = Instantiate(samplePrefab,new Vector3(point.x-imageWidth/2+0.5f, point.y-imageHeight/2+0.5f, 0f), Quaternion.Euler(0, 0, _block.data.sampleSpawnPointsRotations[index])) as GameObject;
-                Debug.Log(_block.data.sampleSpawnPointsRotations[index]);
 
                 ob.transform.SetParent(sampleRoot.transform);
 
@@ -85,17 +84,14 @@ public void SetPlayerToSpawnPoint(Block _block, char _previousTriggerSide)
                 // point is LEFT spawn
                 if (point.x == 0 && _previousTriggerSide == 'r') {
                         Player.tr.position = new Vector3(point.x-imageWidth/2+0.5f, point.y-imageHeight/2+0.5f, 0f);
-                        Debug.Log("Spawning at " + Player.tr.position);
                 }
                 // point is RIGHT spawn
                 else if (point.x == imageWidth-1 && _previousTriggerSide == 'l') {
                         Player.tr.position = new Vector3(point.x-imageWidth/2+0.5f, point.y-imageHeight/2+0.5f, 0f);
-                        Debug.Log("Spawning at " + Player.tr.position);
                 }
                 // point is UP spawn
                 else if (point.y == imageHeight-1 && _previousTriggerSide == 'd') {
                         Player.tr.position = new Vector3(point.x-imageWidth/2+0.5f, point.y-imageHeight/2+0.5f, 0f);
-                        Debug.Log("Spawning at " + Player.tr.position);
                 }
         }
         // Player.tr.localRotation *= Quaternion.Euler(0, 0, 180);

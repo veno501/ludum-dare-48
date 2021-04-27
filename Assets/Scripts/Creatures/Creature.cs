@@ -40,6 +40,7 @@ public class Creature : MonoBehaviour
     {
         // spawn meat collectible?
         // call on creature killed for managers
+        Effects.instance.SmallerExplosion(rbody.position);
         Destroy(this.gameObject);
     }
 }

@@ -53,8 +53,21 @@ public void ParseTexture()
                                 entryPoints.Add(new Vector3(y, x, 0.0f));
                         }
 
-
                 }
+        }
+        int numSamples = Random.Range(1, 4);
+        for (; numSamples > sampleSpawnPoints.Count;)
+        {
+                int i = Random.Range(0, sampleSpawnPoints.Count);
+                sampleSpawnPoints.RemoveAt(i);
+                sampleSpawnPointsRotations.RemoveAt(i);
+        }
+
+        int numEnemies = Random.Range(2, 5);
+        for (; numEnemies > enemySpawnPoints.Count;)
+        {
+                int j = Random.Range(0, enemySpawnPoints.Count);
+                enemySpawnPoints.RemoveAt(j);
         }
 }
 }

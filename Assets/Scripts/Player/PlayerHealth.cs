@@ -59,6 +59,9 @@ protected override void Awake()
 
 public void OnCollisionEnter2D(Collision2D hit)
 {
+								if (hit.transform.name == "bounding box")
+									return;
+
 								if (hit.transform.GetComponentInParent<Creature>()) {
 																hit.transform.GetComponentInParent<Creature>().TakeDamage(new Damage(100f));
 								}
@@ -82,6 +85,8 @@ public void TakeDamage(Damage _damage)
 
 	if (/*isInvulnerable || */ Health == 0)
 									return;
+
+	Effects.instance.TakeHitSound();
 
 	float damageModified = _damage.amount / resistanceModifier;
 

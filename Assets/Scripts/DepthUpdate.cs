@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class DepthUpdate : MonoBehaviour
 {
-// Start is called before the first frame update
-void Start()
-{
-
-}
 
 // Update is called once per frame
 void Update()
 {
+
         int depth = (int) ((((16 - (((int) Player.tr.position.y + 8))) / 16f)) * 100);
         if (depth < 10)
                 GetComponent<UnityEngine.UI.Text>().text = Level.instance.currentLayer.depth + "0" + depth + " M";

@@ -32,7 +32,7 @@ public class Sample : MonoBehaviour
             ob.GetComponent<Rigidbody2D>().velocity = ((Player.rb.position-(Vector2)transform.position) * 
                 (Random.insideUnitCircle*1f)).normalized * 8f;
         }
-        Effects.instance.SampleHitSound();
+        if (Effects.instance) Effects.instance.SampleHitSound();
         Destroy(this.gameObject);
     }
 }

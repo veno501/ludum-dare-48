@@ -5,33 +5,33 @@ using UnityEngine.UI;
 
 public class Level : MonoBehaviour
 {
-    // current layer reference here
-    [SerializeField]
-    public Layer currentLayer;
-    // current block reference here
-    [SerializeField]
-    public Block currentBlock;
-    public float fadeDuration = 0.5f;
-    public Image fadeUI;
-    // public GameObject currentRoot;
-    // block object pool
-    public static Level instance;
-    LayerGenerator layerGenerator;
-    BlockGenerator blockGenerator;
-    char previousTriggerSide;
+// current layer reference here
+[SerializeField]
+public Layer currentLayer;
+// current block reference here
+[SerializeField]
+public Block currentBlock;
+public float fadeDuration = 0.2f;
+public Image fadeUI;
+// public GameObject currentRoot;
+// block object pool
+public static Level instance;
+LayerGenerator layerGenerator;
+BlockGenerator blockGenerator;
+char previousTriggerSide;
 
-    void Awake()
-    {
+void Awake()
+{
         instance = this;
         layerGenerator = GetComponentInChildren<LayerGenerator>();
         blockGenerator = GetComponentInChildren<BlockGenerator>();
 
         // !
         StartLayer();
-    }
+}
 
-    void StartLayer()
-    {
+void StartLayer()
+{
         Player.instance.stats.ResetCollectedSamples();
         // generate layer data, set new depth score, difficulty
         float currentDepth = currentLayer == null ? 1f : currentLayer.depth;
@@ -40,21 +40,21 @@ public class Level : MonoBehaviour
         currentBlock = currentLayer.entryBlock;
         previousTriggerSide = 'd';
         StartBlock();
-    }
+}
 
-    public void SwitchLayer()
-    {
+public void SwitchLayer()
+{
         // scrap current layer
         Destroy(currentBlock.root.gameObject, fadeDuration*2f);
         StartCoroutine(FadeOut(fadeDuration*2f));
 
         Invoke("StartLayer", fadeDuration*2f);
-    }
+}
 
-    void StartBlock()
-    {
+void StartBlock()
+{
         if (currentBlock == null)
-            Debug.LogError("Block is NULL!");
+                Debug.LogError("Block is NULL!");
         // generate block object and colliders from layer
         // !spawn samples, spawn enemies, spawn block switch triggers
 
@@ -63,20 +63,20 @@ public class Level : MonoBehaviour
         blockGenerator.SpawnEnemies(currentBlock);
         if (!currentBlock.isCleared)
         {
-            blockGenerator.SpawnSamples(currentBlock);
+                blockGenerator.SpawnSamples(currentBlock);
         }
         blockGenerator.SetPlayerToSpawnPoint(currentBlock, previousTriggerSide);
 
         Invoke("EnableTriggers", 2f);
         StartCoroutine(FadeIn(fadeDuration));
-        
+
         // fade in
         // set player position, velocity for entry
         // disable entrance tunnel for a few seconds
-    }
+}
 
-    public void SwitchBlock(Block _block, char _triggerSide)
-    {
+public void SwitchBlock(Block _block, char _triggerSide)
+{
         // fade out
         // scrap current block
         // current block is next block
@@ -87,17 +87,17 @@ public class Level : MonoBehaviour
         Vector3[] pointsCopy = currentBlock.data.sampleSpawnPoints.ToArray();
         foreach (Vector3 point in pointsCopy)
         {
-            bool stillAlive = false;
-            foreach (GameObject ob in samples)
-            {
-                if (ob.transform.position.x+blockGenerator.imageWidth/2-0.5f == point.x &&
-                    ob.transform.position.y+blockGenerator.imageHeight/2-0.5f == point.y)
+                bool stillAlive = false;
+                foreach (GameObject ob in samples)
                 {
-                    stillAlive = true;
+                        if (ob.transform.position.x+blockGenerator.imageWidth/2-0.5f == point.x &&
+                            ob.transform.position.y+blockGenerator.imageHeight/2-0.5f == point.y)
+                        {
+                                stillAlive = true;
+                        }
                 }
-            }
-            if (!stillAlive)
-                currentBlock.data.sampleSpawnPoints.Remove(point);
+                if (!stillAlive)
+                        currentBlock.data.sampleSpawnPoints.Remove(point);
         }
 
         StartCoroutine(FadeOut(fadeDuration));
@@ -106,55 +106,55 @@ public class Level : MonoBehaviour
         currentBlock = _block;
         Invoke("StartBlock", fadeDuration);
         // StartBlock(_block);
-    }
+}
 
-    public void OnGameOver()
-    {
+public void OnGameOver()
+{
         // display finish stats, depth
-    }
+}
 
-    public void FinishGame()
-    {
+public void FinishGame()
+{
         // fade out
         //-- or load menu scene
         // animate wreckage ending
         // display retry menu...
-    }
+}
 
-    public IEnumerator FadeOut(float _t)
-    {
+public IEnumerator FadeOut(float _t)
+{
         for (float t = _t; t > 0.0f; t -= Time.deltaTime)
         {
-            Color c = fadeUI.color;
-            c.a = (_t - t) / _t;
-            fadeUI.color = c;
-            yield return null;
+                Color c = fadeUI.color;
+                c.a = (_t - t) / _t;
+                fadeUI.color = c;
+                yield return null;
         }
         Color c1 = fadeUI.color;
         c1.a = 1.0f;
         fadeUI.color = c1;
-    }
+}
 
-    public IEnumerator FadeIn(float _t)
-    {
+public IEnumerator FadeIn(float _t)
+{
         for (float t = _t; t > 0.0f; t -= Time.deltaTime)
         {
-            Color c = fadeUI.color;
-            c.a = t / _t;
-            fadeUI.color = c;
-            yield return null;
+                Color c = fadeUI.color;
+                c.a = t / _t;
+                fadeUI.color = c;
+                yield return null;
         }
         Color c1 = fadeUI.color;
         c1.a = 0.0f;
         fadeUI.color = c1;
-    }
+}
 
-    void EnableTriggers()
-    {
+void EnableTriggers()
+{
         BlockSwitchTrigger[] exitTriggers = currentBlock.root.GetComponentsInChildren<BlockSwitchTrigger>();
         foreach (BlockSwitchTrigger trigger in exitTriggers)
         {
-            trigger.isEnabled = true;
+                trigger.isEnabled = true;
         }
-    }
+}
 }

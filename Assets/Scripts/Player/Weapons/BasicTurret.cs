@@ -9,6 +9,7 @@ namespace Weapons
 		public float projectileDrag;
 		public float spreadAngle;
 		public float kickbackForce;
+		public Slider cooldownTimer;
 
 		// protected override void Start ()
 		// {
@@ -23,6 +24,7 @@ namespace Weapons
 			{
 				FireWeapon();
 			}
+			cooldownTimer.value = HeatLevel;
 		}
 
 		void FireWeapon ()

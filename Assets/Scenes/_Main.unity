@@ -659,7 +659,9 @@ MonoBehaviour:
     type: 3}
   verySmallExplosion: {fileID: 5127091390990390962, guid: c25b4fcbb9004784ea66db3724da251f,
     type: 3}
-  clips: []
+  smallerExplosion: {fileID: 0}
+  takeHitSound: {fileID: 0}
+  sampleHitSound: {fileID: 0}
 --- !u!4 &428161881
 Transform:
   m_ObjectHideFlags: 0

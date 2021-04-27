@@ -56,7 +56,7 @@ public class Effects : MonoBehaviour
 
     public void SampleHitSound()
     {
-        PlayAudio(sampleHitSound, (Vector2)Camera.main.transform.position, 0.2f);
+        PlayAudio(sampleHitSound, (Vector2)Camera.main.transform.position, 0.15f);
     }
 
     public static void PlayAudio (AudioClip clip)
